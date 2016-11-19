@@ -11,7 +11,7 @@ CREATE TABLE location (
   locTime TIMESTAMP DEFAULT current_timestamp
 );
 
-COPY location(appName, host, latitude, longitude, locTime)
-FROM '/Users/donaldhighe/Desktop/DTL/columbia_university_hackathon/db/location.csv' with (format csv, delimiter ',');
+COPY location (appName, host, latitude, longitude, locTime)
+FROM '/Users/admin/code/hackathon/columbia_university_hackathon/db/location.csv' with (format csv, delimiter ',');
 
 COMMIT;
