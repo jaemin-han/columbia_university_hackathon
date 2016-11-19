@@ -12,6 +12,6 @@ CREATE TABLE location (
 );
 
 COPY location (appName, host, latitude, longitude, locTime)
-FROM '/Users/admin/code/hackathon/columbia_university_hackathon/db/location.csv' with (format csv, delimiter ',');
+FROM '/Users/jaeminhan/Desktop/Hackathon/columbia_university_hackathon/db/location.csv' with (format csv, delimiter ',');
 
 COMMIT;
