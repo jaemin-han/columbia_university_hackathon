@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Street View Maps</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"></link>
+  </head>
+  <body>
+    <h1 id="title">NYC TrackMap</h1>
+    <div id="map"></div>
+    <div id="pano"></div>
+
+    <script>
+      function initAutocomplete() {
+        var location = {lat: <%= lat %>, lng: <%= lng %>};
+
+        var myOptions = {
+          center: location,
+          zoom: 15,
+          mapTypeId: 'roadmap'
+        }
+
+        var map = new google.maps.Map(document.getElementById('map'), myOptions);
+
+        var panorama = new google.maps.StreetViewPanorama(
+            document.getElementById('pano'), {
+              position: location,
+              pov: {
+                heading: 34,
+                pitch: 10
+              }
+            });
+        map.setStreetView(panorama);
+
+        let marker = new google.maps.Marker({
+          position: location,
+          map: map,
+          // this makes the marker a draggable item
+          draggable: true,
+          title: "Drag me!",
+        });
+
+        // adding event listener for the drag release readjutment of values
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+          // changing values inside of form
+
+          const $lat = document.getElementById('lat');
+          const $lng = document.getElementById('lng');
+
+          $lat.value = this.getPosition().lat();
+          $lng.value = this.getPosition().lng();
+          console.log('got new values for lat and long');
+        });
+      }
+    </script>
+    <div class="favorites_parent">
+      <h2>Your Favorites</h2>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi1R3t0sCpt0ImqxDLaFhw9oxBiB3PmrM&libraries=places&callback=initAutocomplete"
+         async defer>
+    </script>
+  </body>
+</html>
