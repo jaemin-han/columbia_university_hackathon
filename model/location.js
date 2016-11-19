@@ -37,8 +37,6 @@ module.exports = {
         next();
       })
       .catch(error => next(error));
-  },
-
-
+  }
 
 }
